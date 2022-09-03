@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  join_at: 2022-09-03
+  leave_at: 2022-09-03
+  university_student: one
+  cram_school: one
+
+two:
+  join_at: 2022-09-03
+  leave_at: 2022-09-03
+  university_student: two
+  cram_school: two

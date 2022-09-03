@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  begin_about: 1
+  begin_season: 1
+  begin_month: 1
+  finish_about: 1
+  finish_season: 1
+  finish_month: 1
+  beginning_score: 1.5
+  pro: MyText
+  con: MyText
+  recommended_person: MyText
+  recommended_usage: MyText
+  evaluation: 1
+  university_student: one
+  book: one
+  mock_exam: one
+
+two:
+  begin_about: 1
+  begin_season: 1
+  begin_month: 1
+  finish_about: 1
+  finish_season: 1
+  finish_month: 1
+  beginning_score: 1.5
+  pro: MyText
+  con: MyText
+  recommended_person: MyText
+  recommended_usage: MyText
+  evaluation: 1
+  university_student: two
+  book: two
+  mock_exam: two
