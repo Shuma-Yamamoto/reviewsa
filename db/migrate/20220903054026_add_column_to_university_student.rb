@@ -9,8 +9,5 @@ class AddColumnToUniversityStudent < ActiveRecord::Migration[7.0]
     add_column :university_students, :leave_club_at, :date
     add_column :university_students, :club_frequency, :integer
 
-    add_reference :university_students, :university, foreign_key: true, null: false
-    add_reference :university_students, :high_school, foreign_key: true, null: false
-
   end
 end

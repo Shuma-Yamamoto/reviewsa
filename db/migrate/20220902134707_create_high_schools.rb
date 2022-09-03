@@ -5,7 +5,7 @@ class CreateHighSchools < ActiveRecord::Migration[7.0]
       t.float :score
       t.text :url, null: false
 
-      t.references :prefecture, foreign_key: true, null: true
+      t.references :prefecture, foreign_key: true, null: false
       t.timestamps
     end
   end

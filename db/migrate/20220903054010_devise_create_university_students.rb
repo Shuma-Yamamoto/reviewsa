@@ -32,7 +32,8 @@ class DeviseCreateUniversityStudents < ActiveRecord::Migration[7.0]
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
-
+      t.references :university, foreign_key: true, null: false
+      t.references :high_school, foreign_key: true, null: false
       t.timestamps null: false
     end
 
