@@ -1,0 +1,12 @@
+class CreateHighSchools < ActiveRecord::Migration[7.0]
+  def change
+    create_table :high_schools do |t|
+      t.string :name, null: false
+      t.float :score
+      t.text :url, null: false
+
+      t.references :prefecture, foreign_key: true, null: true
+      t.timestamps
+    end
+  end
+end
