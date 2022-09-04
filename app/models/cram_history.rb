@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CramHistory < ApplicationRecord
   validates :join_at, presence: true
   validates :leave_at, presence: true
