@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Review < ApplicationRecord
   validates :begin_about, presence: true
   validates :begin_season, presence: true
