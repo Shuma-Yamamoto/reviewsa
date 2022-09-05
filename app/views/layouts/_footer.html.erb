@@ -15,6 +15,15 @@
         </div>
       <% end %>
     </div>
+
+  <% elsif examinee_signed_in? %>
+    <div class="card border-secondary rounded-0" style="width: 100%;">
+      <%= link_to subjects_index_path, class: "text-decoration-none text-dark" do %>
+        <div class="card-body">
+          <p class="card-text" align="center">お気に入り</p>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 
   <div class="card border-secondary rounded-0" style="width: 100%;">
