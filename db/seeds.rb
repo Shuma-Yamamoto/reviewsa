@@ -25,3 +25,10 @@ CSV.foreach('db/csv/high.csv', headers: true) do |row|
     prefecture_id: row['prefecture_id']
   )
 end
+
+CSV.foreach('db/csv/subject.csv', headers: true) do |row|
+  Subject.create!(
+    name: row['name']
+    )
+end
+
