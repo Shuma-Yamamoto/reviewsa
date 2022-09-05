@@ -6,12 +6,12 @@ class UniversityStudent < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :email, presence: true
   validates :encrypted_password, presence: true
   validates :entrance_at, presence: true
   validates :ronin, presence: true
-  validates :anonymous_high_school, presence: true
+  validates :anonymous_high_school, inclusion: {in: [true, false]}
 
   belongs_to :university
   belongs_to :high_school

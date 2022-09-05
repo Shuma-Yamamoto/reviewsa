@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-center mt-2">
+  <div class="card border-secondary rounded-0" style="width: 100%;">
+    <%= link_to subjects_index_path, class: "text-decoration-none text-dark" do %>
+      <div class="card-body">
+        <p class="card-text" align="center">検索</p>
+      </div>
+    <% end %>
+  </div>
+
+  <% if university_student_signed_in? %>
+    <div class="card border-secondary rounded-0" style="width: 100%;">
+      <%= link_to subjects_index_path, class: "text-decoration-none text-dark" do %>
+        <div class="card-body">
+          <p class="card-text" align="center">投稿</p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="card border-secondary rounded-0" style="width: 100%;">
+    <%= link_to subjects_index_path, class: "text-decoration-none text-dark" do %>
+      <div class="card-body">
+        <p class="card-text" align="center">マイページ</p>
+      </div>
+    <% end %>
+  </div>
+</div>

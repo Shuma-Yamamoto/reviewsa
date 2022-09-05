@@ -6,7 +6,7 @@ class Examinee < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :email, presence: true
   validates :encrypted_password, presence: true
   validates :grade, presence: true

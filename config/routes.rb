@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'subjects/index'
+  get 'home/top'
   devise_for :university_students
   devise_for :examinees
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_scope :university_student do
+    get '/university_students/sign_up' => 'university_students/registrations#new'
+    get '/university_students/sign_in' => 'university_students/sessions#new'
+    get '/university_students/sign_out' => 'university_students/sessions#destroy'
+  end
+
+  root "home#top"
 end

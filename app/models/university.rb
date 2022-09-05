@@ -7,4 +7,12 @@ class University < ApplicationRecord
   validates :url, presence: true
 
   has_many :university_students
+
+  def full_name
+    if self.department.nil?
+      self.name + " " + self.faculty + "学部"
+    else
+      self.name + " " + self.faculty + "学部 " + self.department + "学科"
+    end
+  end
 end

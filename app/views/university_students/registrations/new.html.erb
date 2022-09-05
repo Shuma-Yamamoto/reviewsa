@@ -1,0 +1,114 @@
+<div class="mt-3">
+  <h2>大学生ユーザ登録</h2>
+</div>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "university_students/shared/error_messages", resource: resource %>
+
+  <div class="field mt-4">
+    <%= f.label :email, "メールアドレス（※大学発行のメールアドレス）" %>
+    <nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field mt-3">
+    <%= f.label :password, "パスワード（※半角英数字6文字以上）" %>
+    <nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field mt-3">
+    <%= f.label :password_confirmation, "パスワード確認" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field mt-3">
+    <%= f.label :name, "ニックネーム" %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field mt-3">
+    <%= f.label :university_id, "大学名" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.collection_select :university_id, University.all, :id, :full_name, {prompt: "選択してください"} %>
+  </div>
+
+  <div class="field mt-3">
+    <%= f.label :entrance_at, "大学入学年度" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.number_field :entrance_at, min: 2015, max: 2022 %>
+  </div>
+
+  <div class="mt-3">
+    <div>
+      合格ステータス
+      &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr>
+    </div>
+    <div class="mt-1">
+      <%= f.label :ronin, '現役合格', value: 0 %>
+      <%= f.radio_button :ronin, 0 %>
+    </div>
+
+    <div class="mt-1" align="left">
+      <%= f.label :ronin, '1浪', value: 1 %>
+      <%= f.radio_button :ronin, 1 %>
+    </div>
+
+    <div class="mt-1" align="left">
+      <%= f.label :ronin, '2浪', value: 2 %>
+      <%= f.radio_button :ronin, 2 %>
+    </div>
+
+    <div class="mt-1" align="left">
+      <%= f.label :ronin, '3浪以上', value: 3 %>
+      <%= f.radio_button :ronin, 3 %>
+    </div>
+  </div>
+
+  <div class="field mt-3">
+    <%= f.label :high_school_id, "高校名" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.collection_select :high_school_id, HighSchool.all, :id, :name, {prompt: "選択してください"} %>
+  </div>
+
+  <div class="mt-3">
+    <div>
+      高校名の公開
+      &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr>
+    </div>
+    <div class="mt-1">
+      <%= f.label :anonymous_high_school, '公開', value: 0 %>
+      <%= f.radio_button :anonymous_high_school, 0 %>
+    </div>
+
+    <div class="mt-1" align="left">
+      <%= f.label :anonymous_high_school, '非公開', value: 1 %>
+      <%= f.radio_button :anonymous_high_school, 1 %>
+    </div>
+  </div>
+
+  <div class="field mt-3">
+    高校時代の部活動について
+  </div>
+  <div class="field mt-1">
+    <%= f.label :join_club_at, "入部時期" %><br>
+    <%= f.date_select :join_club_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022 %>
+  </div>
+  <div class="field mt-2">
+    <%= f.label :leave_club_at, "退部/引退時期" %><br>
+    <%= f.date_select :leave_club_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022 %>
+  </div>
+  <div class="field mt-2">
+    <%= f.label :club_frequency, "活動頻度" %><br>
+    週&nbsp;<%= f.number_field :club_frequency, min: 1, max: 7 %>&nbsp;回
+  </div>
+
+  <div class="actions mt-4">
+    <%= f.submit "ユーザ登録" %>
+  </div>
+<% end %>
+
+<div class="mt-2 mb-2">
+  <%= render "university_students/shared/links" %>
+</div>
