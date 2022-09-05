@@ -12,5 +12,11 @@ Rails.application.routes.draw do
     get '/university_students/sign_out' => 'university_students/sessions#destroy'
   end
 
+  devise_scope :examinee do
+    get '/examinees/sign_up' => 'examinees/registrations#new'
+    get '/examinees/sign_in' => 'examinees/sessions#new'
+    get '/examinees/sign_out' => 'examinees/sessions#destroy'
+  end
+
   root "home#top"
 end
