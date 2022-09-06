@@ -7,7 +7,7 @@ class CreateBooks < ActiveRecord::Migration[7.0]
       t.integer :price, null: false
       t.text :url, null: false
 
-      t.references :subject, foreign_key: true, null: false
+      t.references :subject, foreign_key: true, null: true
       t.timestamps
     end
   end

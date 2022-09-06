@@ -32,3 +32,10 @@ CSV.foreach('db/csv/subject.csv', headers: true) do |row|
     )
 end
 
+CSV.foreach('db/csv/book.csv', headers: true) do |row|
+  Book.create!(
+    name: row['name'],
+    price: row['price'],
+    url: row['url']
+  )
+end

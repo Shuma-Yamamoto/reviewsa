@@ -5,7 +5,7 @@ class Book < ApplicationRecord
   validates :price, presence: true
   validates :url, presence: true
 
-  belongs_to :subject
+  belongs_to :subject, optional: true
   has_many :fix_books
   has_many :reviews
   has_many :favorite_books
