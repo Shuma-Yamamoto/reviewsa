@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_060114) do
     t.string "name", null: false
     t.integer "price", null: false
     t.text "url", null: false
-    t.integer "subject_id", null: false
+    t.integer "subject_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_books_on_subject_id"
