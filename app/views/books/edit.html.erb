@@ -1,0 +1,17 @@
+<div class="mt-3">
+  <h2>レビューを投稿する</h2>
+</div>
+
+<p>「<%= @book.name %>」は未登録の参考書のようです</p>
+
+<%= form_with model: @book do |f| %>
+  <div class="mt-4">
+    <%= f.label :subject_id, "この参考書の科目を選択してください" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.collection_select :subject_id, Subject.all, :id, :name, {prompt: "選択してください"}, style: "width:15%" %>
+  </div>
+
+  <div class="actions mt-4">
+    <%= f.submit "登録" %>
+  </div>
+<% end %>

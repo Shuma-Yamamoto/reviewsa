@@ -22,8 +22,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_060114) do
   end
 
   create_table "cram_histories", force: :cascade do |t|
-    t.date "join_at", null: false
-    t.date "leave_at", null: false
+    t.date "join_at"
+    t.date "leave_at"
     t.integer "university_student_id", null: false
     t.integer "cram_school_id", null: false
     t.datetime "created_at", null: false
@@ -112,12 +112,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_060114) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer "begin_about", null: false
-    t.integer "begin_season", null: false
-    t.integer "begin_month", null: false
+    t.integer "begin_season"
+    t.integer "begin_month"
     t.integer "finish_about", null: false
-    t.integer "finish_season", null: false
-    t.integer "finish_month", null: false
-    t.float "beginning_score", null: false
+    t.integer "finish_season"
+    t.integer "finish_month"
+    t.float "beginning_score"
     t.text "pro", null: false
     t.text "con", null: false
     t.text "recommended_person", null: false
@@ -125,7 +125,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_060114) do
     t.integer "evaluation", null: false
     t.integer "university_student_id", null: false
     t.integer "book_id", null: false
-    t.integer "mock_exam_id", null: false
+    t.integer "mock_exam_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_reviews_on_book_id"

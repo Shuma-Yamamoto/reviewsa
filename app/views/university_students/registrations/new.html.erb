@@ -5,7 +5,11 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "university_students/shared/error_messages", resource: resource %>
 
-  <div class="field mt-4">
+  <div class="mt-4">
+    <h4>基本情報</h4>
+  </div>
+
+  <div class="field mt-3">
     <%= f.label :email, "メールアドレス（※大学発行のメールアドレス）" %>
     <nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -41,6 +45,39 @@
     <%= f.number_field :entrance_at, min: 2015, max: 2022 %>
   </div>
 
+  <div class="mt-5">
+    <h4>受験について</h4>
+  </div>
+
+  <%= f.fields_for :cram_histories, CramHistory.new do |cram| %>
+    <div class="field mt-3">
+      <%= cram.label :cram_school_id, "通っていた塾" %>
+      &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br>
+      <%= cram.collection_select :cram_school_id, CramSchool.all, :id, :name, {prompt: "選択してください"}, include_blank: true %>
+    </div>
+
+    <div class="field mt-2">
+      <%= cram.label :join_at, "入塾時期" %><br>
+      <%= cram.date_select :join_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true %>
+    </div>
+
+    <div class="field mt-2">
+      <%= cram.label :leave_at, "退塾/卒塾時期" %><br>
+      <%= cram.date_select :leave_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true %>
+    </div>
+  <% end %>
+
+  <div class="field mt-3">
+    <%= f.label :subject_ids, "受験科目（複数選択）" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br>
+    <%= f.collection_check_boxes :subject_ids, Subject.all, :id, :name, include_hidden: false do |sub| %>
+      <div class="mt-1">
+        <%= sub.check_box %>
+        <%= sub.text %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="mt-3">
     <div>
       合格ステータス
@@ -67,6 +104,10 @@
     </div>
   </div>
 
+  <div class="mt-5">
+    <h4>高校について</h4>
+  </div>
+
   <div class="field mt-3">
     <%= f.label :high_school_id, "高校名" %>
     &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
@@ -89,16 +130,16 @@
     </div>
   </div>
 
-  <div class="field mt-3">
+  <div class="mt-3">
     高校時代の部活動について
   </div>
   <div class="field mt-1">
     <%= f.label :join_club_at, "入部時期" %><br>
-    <%= f.date_select :join_club_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022 %>
+    <%= f.date_select :join_club_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true %>
   </div>
   <div class="field mt-2">
     <%= f.label :leave_club_at, "退部/引退時期" %><br>
-    <%= f.date_select :leave_club_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022 %>
+    <%= f.date_select :leave_club_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true %>
   </div>
   <div class="field mt-2">
     <%= f.label :club_frequency, "活動頻度" %><br>

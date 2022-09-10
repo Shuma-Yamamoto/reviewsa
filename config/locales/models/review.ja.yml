@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      review: レビュー
+    attributes:
+      review:
+        begin_about: 「いつから使い始めたか（時期）」
+        finish_about: 「いつまで使っていたか（時期）」
+        pro: 「この参考書の良い点」
+        con: 「この参考書のあまり良くない点」
+        recommended_person: 「どんな人におすすめしたい参考書か」
+        recommended_usage: 「どんな使い方をしていたか（おすすめの使い方）」
+        evaluation: 「総合評価（5段階）」

@@ -1,14 +1,12 @@
 <% if resource.errors.any? %>
   <div id="error_explanation">
-    <h2>
-      <%= I18n.t("errors.messages.not_saved",
-                 count: resource.errors.count,
-                 resource: resource.class.model_name.human.downcase)
-       %>
-    </h2>
+    <div class="alert alert-danger">
+      正しく入力されていない項目が <%= pluralize(resource.errors.count, "個") %>あります。
+      メッセージをご確認の上、もう一度ご入力ください。
+    </div>
     <ul>
-      <% resource.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% resource.errors.full_messages.each do |msg| %>
+        <li><%= msg.gsub("は一覧にありません","を入力してください") %></li>
       <% end %>
     </ul>
   </div>
