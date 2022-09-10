@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      university_student: 大学生
+    attributes:
+      university_student:
+        email: 「メールアドレス」
+        password: 「パスワード」
+        encrypted_password: 「パスワード確認」
+        name: 「ニックネーム」
+        university: 「大学名」
+        ronin: 「合格ステータス」
+        high_school: 「高校名」
+        entrance_at: 「入学時期」
+        anonymous_high_school: 「高校名の公開」
+        subject_ids: 「受験科目」

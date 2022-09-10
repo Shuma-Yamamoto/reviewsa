@@ -75,3 +75,6 @@ end
 
 gem 'devise'
 gem 'config'
+
+gem 'ransack'
+gem 'kaminari'

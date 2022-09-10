@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    models:
+      cram_histories: 通塾履歴
+    attributes:
+      cram_histories:
+        cram_school: 「通っていた塾」

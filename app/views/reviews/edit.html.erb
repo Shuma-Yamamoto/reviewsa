@@ -1,0 +1,108 @@
+<div class="mt-3">
+  <h2>レビューを編集する</h2>
+</div>
+
+<p>「<%= @book.name %>」のレビューを編集する</p>
+
+<%= form_with model: @review do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.hidden_field :book_id, value: @book.id %>
+  <div class="mt-4">
+    <div>
+      いつから使い始めたか
+    </div>
+
+    <div class="mt-2">
+      時期：
+      <%= f.select :begin_about, [["高校1年", "first"], ["高校2年", "second"], ["高校3年", "third"], ["浪人期", "ronin"]], {prompt: "-"}, style: "width:10%" %>
+      &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr>
+    </div>
+
+    <div class="mt-2">
+      季節：
+      <%= f.select :begin_season, [["春（4-6月）", "spring"], ["夏（7-9月）", "summer"], ["秋（10-12月）", "autumn"], ["冬（1-3月）", "winter"]], {prompt: "-"}, style: "width:10%" %>
+    </div>
+
+    <div class="mt-2">
+      <%= f.number_field :begin_month, min: 1, max: 12, style: "width:4.5%" %>
+      &nbsp;月
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div>
+      いつまで使っていたか
+    </div>
+
+    <div class="mt-2">
+      時期：
+      <%= f.select :finish_about, [["高校1年", "first"], ["高校2年", "second"], ["高校3年", "third"], ["浪人期", "ronin"]], {prompt: "-"}, style: "width:10%" %>
+      &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr>
+    </div>
+
+    <div class="mt-2">
+      季節：
+      <%= f.select :finish_season, [["春（4-6月）", "spring"], ["夏（7-9月）", "summer"], ["秋（10-12月）", "autumn"], ["冬（1-3月）", "winter"]], {prompt: "-"}, style: "width:10%" %>
+    </div>
+
+    <div class="mt-2">
+      <%= f.number_field :finish_month, min: 1, max: 12, style: "width:4.5%" %>
+      &nbsp;月
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div>
+      使い始めたときの学力
+    </div>
+
+    <div class="mt-2">
+      偏差値：
+      <%= f.number_field :beginning_score, min: 1, max: 100, style: "width:4.5%" %>
+    </div>
+
+    <div class="mt-2 mb-1">
+      模試&emsp;：
+      <%= f.collection_select :mock_exam_id, MockExam.all, :id, :name, {prompt: "選択してください"}, style: "width:15%" %>
+    </div>
+    ※マークか記述か忘れた方は、マークを選択してください。
+  </div>
+
+  <div class="mt-4">
+    <%= f.label :pro, "この参考書の良い点" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.text_area :pro, style: "width:60%; height:120px;" %>
+  </div>
+
+  <div class="mt-4">
+    <%= f.label :con, "この参考書のあまり良くない点" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.text_area :con, style: "width:60%; height:120px;" %>
+  </div>
+
+  <div class="mt-4">
+    <%= f.label :recommended_person, "どんな人におすすめしたい参考書か" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.text_area :recommended_person, style: "width:60%; height:120px;" %>
+  </div>
+
+  <div class="mt-4">
+    <%= f.label :recommended_usage, "どんな使い方をしていたか（おすすめの使い方）" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.text_area :recommended_usage, style: "width:60%; height:120px;" %>
+  </div>
+
+  <div class="mt-4">
+    <%= f.label :evaluation, "総合評価（5段階）" %>
+    &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
+    <%= f.number_field :evaluation, min: 1, max: 5, style: "width:10%" %>
+  </div>
+
+  <div class="actions mt-4">
+    <%= f.submit "再投稿" %>
+  </div>
+<% end %>
+
+<div class="mt-4">
+  <%= render 'layouts/footer' %>
+</div>

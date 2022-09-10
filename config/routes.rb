@@ -1,8 +1,16 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'subjects/index'
+  get 'review_thanks/index'
   get 'home/top'
+  root "home#top"
+
+  resources :univ_my_pages, only: :show
+  resources :subjects, only: [:index, :show]
+  resources :books, only: [:index, :show, :edit, :update]
+  resources :reviews, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :review_thanks, only: :index
+
   devise_for :university_students
   devise_for :examinees
 
@@ -17,6 +25,4 @@ Rails.application.routes.draw do
     get '/examinees/sign_in' => 'examinees/sessions#new'
     get '/examinees/sign_out' => 'examinees/sessions#destroy'
   end
-
-  root "home#top"
 end

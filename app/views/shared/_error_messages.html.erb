@@ -1,0 +1,13 @@
+<% if object.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      正しく入力されていない項目が&nbsp;<%= pluralize(object.errors.count, "個") %>あります。
+      メッセージをご確認の上、もう一度ご入力ください。
+    </div>
+    <ul>
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

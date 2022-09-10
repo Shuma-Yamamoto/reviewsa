@@ -2,12 +2,6 @@
 
 require 'csv'
 
-CSV.foreach('db/csv/tdfk.csv', headers: true) do |row|
-  Prefecture.create!(
-    name: row['name']
-  )
-end
-
 CSV.foreach('db/csv/univ.csv', headers: true) do |row|
   University.create!(
     name: row['name'],
@@ -18,11 +12,23 @@ CSV.foreach('db/csv/univ.csv', headers: true) do |row|
   )
 end
 
+CSV.foreach('db/csv/tdfk.csv', headers: true) do |row|
+  Prefecture.create!(
+    name: row['name']
+  )
+end
+
 CSV.foreach('db/csv/high.csv', headers: true) do |row|
   HighSchool.create!(
     name: row['name'],
     score: row['score'],
     prefecture_id: row['prefecture_id']
+  )
+end
+
+CSV.foreach('db/csv/cram.csv', headers: true) do |row|
+  CramSchool.create!(
+    name: row['name']
   )
 end
 
@@ -37,5 +43,11 @@ CSV.foreach('db/csv/book.csv', headers: true) do |row|
     name: row['name'],
     price: row['price'],
     url: row['url']
+  )
+end
+
+CSV.foreach('db/csv/mock.csv', headers: true) do |row|
+  MockExam.create!(
+    name: row['name']
   )
 end
