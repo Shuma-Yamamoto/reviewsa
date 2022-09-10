@@ -1,7 +1,7 @@
 <% if resource.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
-      正しく入力されていない項目が <%= pluralize(resource.errors.count, "個") %>あります。
+      正しく入力されていない項目が&nbsp;<%= pluralize(resource.errors.count, "個") %>あります。
       メッセージをご確認の上、もう一度ご入力ください。
     </div>
     <ul>
