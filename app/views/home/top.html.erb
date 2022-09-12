@@ -1,31 +1,54 @@
 <div class="mt-3">
-  <h2>Reviewsa</h2>
+    <h2>現役大学生による、参考書のレビューサイト。</h2>
+  </div>
+
+<div class="mt-3">
+  <p>
+    人気の参考書は調べればすぐに分かるけれど、その中から自分に合った参考書が選べない...<br>
+    自分と志望校や学力、部活の忙しさなどが同じだった先輩たちのレビューを見て、自分に合った参考書を見つけよう！
+  </p>
 </div>
 
-<div class="mt-4">
-  <p>現役大学生による参考書のレビューを見ることができるサイトです。</p>
+<div class="card mt-4">
+  <h3 class="card-header">現役大学生のレビューを見て、自分に合った参考書を見つけたい。</h3>
+  <div class="card-body">
+    <%= link_to examinees_sign_up_path, class: "text-decoration-none" do %>
+      <div class="d-grid col-11 mx-auto">
+        <button class="btn btn-outline-primary" type="button">
+            <div align="center">受験生ユーザ登録</div>
+        </button>
+      </div>
+    <% end %>
+
+    <%= link_to examinees_sign_in_path, class: "text-decoration-none" do %>
+      <div class="d-grid col-11 mx-auto mt-3">
+        <button class="btn btn-outline-primary" type="button">
+          <div align="center">受験生ログイン</div>
+        </button>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<div class="card border-dark mt-4" style="max-width: 10rem;">
-  <%= link_to university_students_sign_up_path, class: "text-decoration-none text-dark" do %>
-    <div align="center">大学生ユーザ登録</div>
-  <% end %>
+<div class="card mt-5">
+  <h3 class="card-header">頑張る受験生のために、志望校合格の手助けがしたい。</h3>
+  <div class="card-body">
+    <%= link_to university_students_sign_up_path, class: "text-decoration-none text-dark" do %>
+      <div class="d-grid col-11 mx-auto">
+        <button class="btn btn-outline-primary" type="button">
+          <div align="center">大学生ユーザ登録</div>
+        </button>
+      </div>
+    <% end %>
+
+    <%= link_to university_students_sign_in_path, class: "text-decoration-none text-dark" do %>
+      <div class="d-grid col-11 mx-auto mt-3">
+        <button class="btn btn-outline-primary" type="button">
+          <div align="center">大学生ログイン</div>
+        </button>
+      </div>
+    <% end %>
+  </div>
 </div>
 
-<div class="card border-dark mt-4" style="max-width: 10rem;">
-  <%= link_to university_students_sign_in_path, class: "text-decoration-none text-dark" do %>
-    <div align="center">大学生ログイン</div>
-  <% end %>
-</div>
-
-<div class="card border-dark mt-4" style="max-width: 10rem;">
-  <%= link_to examinees_sign_up_path, class: "text-decoration-none text-dark" do %>
-    <div align="center">受験生ユーザ登録</div>
-  <% end %>
-</div>
-
-<div class="card border-dark mt-4" style="max-width: 10rem;">
-  <%= link_to examinees_sign_in_path, class: "text-decoration-none text-dark" do %>
-    <div align="center">受験生ログイン</div>
-  <% end %>
-</div>
+<%= render 'layouts/footer_before_auth' %>
