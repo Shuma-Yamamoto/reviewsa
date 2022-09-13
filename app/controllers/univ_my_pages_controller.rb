@@ -1,5 +1,6 @@
 class UnivMyPagesController < ApplicationController
-  before_action :authenticate_any!, only: :show
+  before_action :authenticate_any!
+  # before_action :correct_my_page
 
   def show
     @univ = UniversityStudent.find(params[:id])
@@ -8,4 +9,12 @@ class UnivMyPagesController < ApplicationController
     @q = @univ.reviews.ransack(params[:q])
     @reviews = @q.result(distinct: true).page(params[:page]).per(3)
   end
+
+  # private
+  # def correct_my_page
+  #   @univ = UniversityStudent.find(params[:id])
+  #   unless @univ.id == current_university_student.id
+  #     redirect_to subjects_path
+  #   end
+  # end
 end

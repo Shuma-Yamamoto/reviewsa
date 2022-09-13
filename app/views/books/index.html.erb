@@ -43,13 +43,11 @@
     </div>
   <% end %>
 <% else %>
-  <p>検索結果なし</p>
+  <h5>検索結果なし</h5>
 <% end %>
 
 <div class="mt-4">
   <%= paginate @books %>
 </div>
 
-<div style="margin-top: 100px;">
-  <%= render 'layouts/footer_after_auth' %>
-</div>
+<%= render 'layouts/footer_after_auth' %>

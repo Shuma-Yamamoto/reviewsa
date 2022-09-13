@@ -1,0 +1,13 @@
+ja:
+  enums:
+    review:
+      begin_about:
+        first: 高校1年
+        second: 高校2年
+        third: 高校3年
+        ronin: 浪人期
+      finish_about:
+        first: 高校1年
+        second: 高校2年
+        third: 高校3年
+        ronin: 浪人期

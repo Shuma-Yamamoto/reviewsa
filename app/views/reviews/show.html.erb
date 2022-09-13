@@ -1,2 +1,197 @@
-<h1>Reviews#show</h1>
-<p>Find me in app/views/reviews/show.html.erb</p>
+<div class="mt-3">
+  <h2><%= @review.book.name %>のレビュー</h2>
+</div>
+
+<div class="mt-4">
+  <h4>このレビューを書いた人について</h4>
+</div>
+
+<div class="mt-2">
+  ニックネーム：<%= @univ.name %>
+</div>
+
+<h5 class="mt-3">
+  大学について
+</h5>
+
+<div class="mt-2">
+  大学：<%= @univ.university.name %>&nbsp;
+  <%= @univ.university.faculty %>学部&nbsp;
+  <%= @univ.university.department %>学科
+</div>
+
+<div class="mt-1">
+  入学年度：<%= @univ.entrance_at %>年
+</div>
+
+<div class="mt-3">
+  受験科目：
+  <% @exam.each do |e| %>
+    <div>
+      <% if e.subject_id == 1 %>
+        &nbsp;英語
+        <% next %>
+      <% elsif e.subject_id == 8 %>
+        &nbsp;数学
+        <% next %>
+      <% elsif e.subject_id.between?(9,11) %>
+        &nbsp;<%= e.subject.name %>
+        <% next %>
+      <% elsif e.subject_id.between?(13,16) %>
+        &nbsp;<%= e.subject.name %>
+        <% next %>
+      <% elsif e.subject_id.between?(17,20) %>
+        &nbsp;<%= e.subject.name %>
+        <% next %>
+      <% elsif e.subject_id == 21 %>
+        &nbsp;小論文
+        <% next %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-3">
+  合格ステータス：
+  <% if @univ.ronin == 0 %>
+    現役合格
+  <% else %>
+    <%= @univ.ronin %>浪で合格
+  <% end %>
+</div>
+
+<h5 class="mt-4">
+  高校について
+</h5>
+
+<div class="mt-2">
+  高校：
+  <% if @univ.anonymous_high_school == false %>
+    <%= @univ.high_school.name %>
+  <% else %>
+    非公開
+  <% end %>
+</div>
+
+<div class="mt-1">
+  高校偏差値：<%= @univ.high_school.score %>
+</div>
+
+<div class="mt-3">
+  部活の入部時期：
+  <% if @univ.join_club_at.present? %>
+    <%= @univ.join_club_at.strftime("%Y年%-m月") %>
+  <% end %>
+</div>
+
+<div class="mt-1">
+  部活の退部/引退時期：
+  <% if @univ.leave_club_at.present? %>
+    <%= @univ.leave_club_at.strftime("%Y年%-m月") %>
+  <% end %>
+</div>
+
+<div class="mt-1">
+  部活の活動頻度：
+  <% if @univ.club_frequency.present? %>
+    週<%= @univ.club_frequency %>回
+  <% end %>
+</div>
+
+<div class="mt-3">
+  通っていた塾：<%= @cram.cram_school.name %>
+</div>
+
+<div class="mt-1">
+  入塾時期：
+  <% if @cram.join_at.present? %>
+    <%= @cram.join_at.strftime("%Y年%-m月") %>
+  <% end %>
+</div>
+
+<div class="mt-1">
+  退塾/卒塾時期：
+  <% if @cram.leave_at.present? %>
+    <%= @cram.leave_at.strftime("%Y年%-m月") %>
+  <% end %>
+</div>
+
+<div class="mt-4">
+  <h4>レビュー詳細</h4>
+</div>
+
+<div class="mt-2">
+  総合評価（5段階）：
+  <% @review.evaluation.times do %>
+    ★
+  <% end %>
+</div>
+
+
+<div class="mt-3">
+  使い始めた時期：<%= @review.begin_about_i18n %>
+  <% if @review.begin_month.present? %>
+    の<%= @review.begin_month %>月
+  <% elsif @review.begin_season.present? %>
+    の<%= @review.begin_season %>
+  <% end %>
+</div>
+
+<div class="mt-1">
+  使い終えた時期：<%= @review.finish_about_i18n %>
+  <% if @review.finish_month.present? %>
+    の<%= @review.finish_month %>月
+  <% elsif @review.finish_season.present? %>
+    の<%= @review.finish_season %>
+  <% end %>
+</div>
+
+<div class="mt-3">
+  使い始めたときの偏差値：<% if @review.beginning_score.present? %>
+    <%= @review.beginning_score %>
+  <% end %>
+</div>
+
+<div class="mt-1">
+  模試：<% if @review.mock_exam_id.present? %>
+    <%= @review.mock_exam.name %>
+  <% end %>
+</div>
+
+<div class="mt-3">この参考書の良い点</div>
+
+<div class="card border-dark mt-1" style="width: 600px; height: 120px;">
+  <div class="mt-1 mb-1 ms-2">
+    <%= @review.pro %>
+  </div>
+</div>
+
+<div class="mt-3">この参考書のあまり良くない点</div>
+
+<div class="card border-dark mt-1" style="width: 600px; height: 120px;">
+  <div class="mt-1 mb-1 ms-2">
+    <%= @review.con %>
+  </div>
+</div>
+
+<div class="mt-3">どんな人におすすめしたい参考書か</div>
+
+<div class="card border-dark mt-1" style="width: 600px; height: 120px;">
+  <div class="mt-1 mb-1 ms-2">
+    <%= @review.recommended_person %>
+  </div>
+</div>
+
+<div class="mt-3">どんな使い方をしていたか（おすすめの使い方）</div>
+
+<div class="card border-dark mt-1" style="width: 600px; height: 120px;">
+  <div class="mt-1 mb-1 ms-2">
+    <%= @review.recommended_usage %>
+  </div>
+</div>
+
+<div class="mt-3">
+  <%= link_to 'この人の他のレビューも見る', univ_my_page_path(id: @review.university_student_id) %>
+</div>
+
+<%= render 'layouts/footer_after_auth' %>
