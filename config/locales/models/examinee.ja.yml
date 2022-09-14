@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      examinee: 大学生
+    attributes:
+      examinee:
+        email: 「メールアドレス」
+        password: 「パスワード」
+        encrypted_password: 「パスワード確認」
+        name: 「ニックネーム」
+        grade: 「学年」

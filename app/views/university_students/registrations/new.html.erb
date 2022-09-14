@@ -42,7 +42,7 @@
   <div class="field mt-3">
     <%= f.label :entrance_at, "大学入学年度" %>
     &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br />
-    <%= f.number_field :entrance_at, min: 2015, max: 2022 %>
+    <%= f.number_field :entrance_at, min: 2015, max: 2022 %>&nbsp;年
   </div>
 
   <div class="mt-5">
@@ -58,22 +58,22 @@
 
     <div class="field mt-2">
       <%= cram.label :join_at, "入塾時期" %><br>
-      <%= cram.date_select :join_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true %>
+      <%= raw sprintf(cram.date_select(:join_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true, date_separator: '%s'),'年 ')+'月' %>
     </div>
 
     <div class="field mt-2">
       <%= cram.label :leave_at, "退塾/卒塾時期" %><br>
-      <%= cram.date_select :leave_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true %>
+      <%= raw sprintf(cram.date_select(:leave_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true, date_separator: '%s'),'年 ')+'月' %>
     </div>
   <% end %>
 
   <div class="field mt-3">
     <%= f.label :subject_ids, "受験科目（複数選択）" %>
     &nbsp;<nobr class="badge rounded-pill bg-danger" style="font-size: .4em; translate: 0px -2px;">必須</nobr><br>
-    <%= f.collection_check_boxes :subject_ids, Subject.all, :id, :name, include_hidden: false do |sub| %>
+    <%= f.collection_check_boxes :subject_ids, Subject.where(id: [1,8,9,10,11,13,14,15,16,17,18,19,20,21]), :id, :name, include_hidden: false do |sub| %>
       <div class="mt-1">
         <%= sub.check_box %>
-        <%= sub.text %>
+        <%= sub.text.gsub("単語・熟語","語") %>
       </div>
     <% end %>
   </div>
@@ -135,11 +135,11 @@
   </div>
   <div class="field mt-1">
     <%= f.label :join_club_at, "入部時期" %><br>
-    <%= f.date_select :join_club_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true %>
+    <%= raw sprintf(f.date_select(:join_club_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true, date_separator: '%s'),'年 ')+'月' %>
   </div>
   <div class="field mt-2">
     <%= f.label :leave_club_at, "退部/引退時期" %><br>
-    <%= f.date_select :leave_club_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true %>
+    <%= raw sprintf(f.date_select(:leave_club_at, discard_day: true, use_month_numbers: true, start_year: 2010, end_year: 2022, include_blank: true, date_separator: '%s'),'年 ')+'月' %>
   </div>
   <div class="field mt-2">
     <%= f.label :club_frequency, "活動頻度" %><br>
