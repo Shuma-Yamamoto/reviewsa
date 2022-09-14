@@ -130,6 +130,8 @@ GEM
       dry-core (~> 0.5, >= 0.5)
       dry-initializer (~> 3.0)
       dry-schema (~> 1.8, >= 1.8.0)
+    enum_help (0.0.19)
+      activesupport (>= 3.0.0)
     erubi (1.11.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -211,6 +213,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
+    rails-i18n (7.0.5)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (7.0.3.1)
       actionpack (= 7.0.3.1)
       activesupport (= 7.0.3.1)
@@ -285,11 +290,13 @@ DEPENDENCIES
   config
   debug
   devise
+  enum_help
   importmap-rails
   jbuilder
   kaminari
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
+  rails-i18n
   ransack
   selenium-webdriver
   sprockets-rails

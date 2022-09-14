@@ -1,10 +1,14 @@
 class ReviewsController < ApplicationController
-  # before_action :authenticate_university_any!, only: [:show]
+  before_action :authenticate_any!, only: :show
   before_action :authenticate_university_student!, only: [:new, :create, :edit, :update, :destroy]
   before_action :up_to_one, only: :new
   before_action :correct_review, only: :edit
 
   def show
+    @review = Review.find(params[:id])
+    @univ = @review.university_student
+    @exam = ExamSubject.where(university_student_id: @univ.id)
+    @cram = CramHistory.find_by(university_student_id: @univ.id)
   end
 
   def new

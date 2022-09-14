@@ -11,26 +11,47 @@
 </h5>
 
 <div class="mt-2">
-  大学：<%= @univ.university.name %>&nbsp;
-  <%= @univ.university.faculty %>学部&nbsp;
-  <%= @univ.university.department %>学科
+  大学：<%= @univ.university.full_name %>
 </div>
 
-<div class="mt-2">
+<div class="mt-1">
   入学年度：<%= @univ.entrance_at %>年
 </div>
 
-<div class="mt-2">
+<div class="mt-3">
   受験科目：
   <% @exam.each do |e| %>
-    <div class="mb-1">
-      <%= e.subject.name %>
+    <div>
+      <% if e.subject_id == 1 %>
+        &nbsp;英語
+        <% next %>
+      <% elsif e.subject_id == 8 %>
+        &nbsp;数学
+        <% next %>
+      <% elsif e.subject_id.between?(9,11) %>
+        &nbsp;<%= e.subject.name %>
+        <% next %>
+      <% elsif e.subject_id.between?(13,16) %>
+        &nbsp;<%= e.subject.name %>
+        <% next %>
+      <% elsif e.subject_id.between?(17,20) %>
+        &nbsp;<%= e.subject.name %>
+        <% next %>
+      <% elsif e.subject_id == 21 %>
+        &nbsp;小論文
+        <% next %>
+      <% end %>
     </div>
   <% end %>
 </div>
 
-<div class="mt-2">
-  合格ステータス：<%= @univ.ronin %>
+<div class="mt-3">
+  合格ステータス：
+  <% if @univ.ronin == 0 %>
+    現役合格
+  <% else %>
+    <%= @univ.ronin %>浪で合格
+  <% end %>
 </div>
 
 <h5 class="mt-4">
@@ -38,31 +59,55 @@
 </h5>
 
 <div class="mt-2">
-  高校：<%= @univ.high_school.name %>（<%= @univ.anonymous_high_school %>）
+  高校：
+  <% if @univ.anonymous_high_school == false %>
+    <%= @univ.high_school.name %>
+  <% else %>
+    非公開
+  <% end %>
 </div>
 
-<div class="mt-2">
-  部活の入部時期：<%= @univ.join_club_at %>
+<div class="mt-1">
+  高校偏差値：<%= @univ.high_school.score %>
 </div>
 
-<div class="mt-2">
-  部活の退部/引退時期：<%= @univ.leave_club_at %>
+<div class="mt-3">
+  部活の入部時期：
+  <% if @univ.join_club_at.present? %>
+    <%= @univ.join_club_at.strftime("%Y年%-m月") %>
+  <% end %>
 </div>
 
-<div class="mt-2">
-  部活の活動頻度：週<%= @univ.club_frequency %>回
+<div class="mt-1">
+  部活の退部/引退時期：
+  <% if @univ.leave_club_at.present? %>
+    <%= @univ.leave_club_at.strftime("%Y年%-m月") %>
+  <% end %>
 </div>
 
-<div class="mt-4">
+<div class="mt-1">
+  部活の活動頻度：
+  <% if @univ.club_frequency.present? %>
+    週<%= @univ.club_frequency %>回
+  <% end %>
+</div>
+
+<div class="mt-3">
   通っていた塾：<%= @cram.cram_school.name %>
 </div>
 
-<div class="mt-2">
-  入塾時期：<%= @cram.join_at %>
+<div class="mt-1">
+  入塾時期：
+  <% if @cram.join_at.present? %>
+    <%= @cram.join_at.strftime("%Y年%-m月") %>
+  <% end %>
 </div>
 
-<div class="mt-2">
-  退塾/卒塾時期：<%= @cram.leave_at %>
+<div class="mt-1">
+  退塾/卒塾時期：
+  <% if @cram.leave_at.present? %>
+    <%= @cram.leave_at.strftime("%Y年%-m月") %>
+  <% end %>
 </div>
 
 <h4 class="mt-4">
@@ -71,14 +116,21 @@
 
 <% @reviews.each do |r| %>
   <div class="card border-dark mb-3" style="width: 100%;">
-    <%= link_to edit_review_path(id:r.id), class: "text-decoration-none text-dark" do %>
+    <%= link_to review_path(id:r.id), class: "text-decoration-none text-dark" do %>
       <div class="mt-1 mb-1 ms-2">
+        総合評価：
+        <% r.evaluation.times do %>
+          ★
+        <% end %><br>
         「<%= r.book.name %>」のレビュー
-        <% if r.university_student_id == current_university_student.id %>
-          <div class="d-flex justify-content-left mt-1">
-            <%= link_to "編集", edit_review_path(id:r.id), class: 'btn btn-primary mr-3' %>&nbsp;
-            <%= button_to "削除", review_path(r.id), method: :delete, class: 'btn btn-danger' %>
-          </div>
+        <% begin %>
+          <% if r.university_student_id == current_university_student.id %>
+            <div class="d-flex justify-content-left mt-1 mb-1">
+              <%= link_to "編集", edit_review_path(id:r.id), class: 'btn btn-outline-primary mr-3' %>&nbsp;
+              <%= button_to "削除", review_path(r.id), method: :delete, class: 'btn btn-outline-danger' %>
+            </div>
+          <% end %>
+        <% rescue %>
         <% end %>
       </div>
     <% end %>
@@ -89,6 +141,6 @@
   <%= paginate @reviews %>
 </div>
 
-<div class="mt-4">
-  <%= render 'layouts/footer' %>
+<div style="margin-top: 100px;">
+  <%= render 'layouts/footer_after_auth' %>
 </div>

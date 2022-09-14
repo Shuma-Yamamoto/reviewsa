@@ -78,3 +78,6 @@ gem 'config'
 
 gem 'ransack'
 gem 'kaminari'
+
+gem 'rails-i18n'
+gem 'enum_help'

@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_any!, only: :show
   before_action :authenticate_university_student!, only: [:index, :edit, :update]
   before_action :correct_book, only: :edit
 
@@ -8,6 +9,8 @@ class BooksController < ApplicationController
   end
 
   def show
+    @book = Book.find(params[:id])
+    @reviews = Review.where(book_id: @book.id).page(params[:page]).per(7)
   end
 
   def edit
