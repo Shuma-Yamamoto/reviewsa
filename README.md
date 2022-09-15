@@ -1,6 +1,7 @@
 # Reviewsa
 ## サービス概要
-大学受験の参考書について、現役大学生によるレビューを閲覧することができるサイト。
+大学受験の参考書について、現役大学生によるレビューを閲覧することができるサイト。<br>
+<a href="https://reviewsa-exam.herokuapp.com/" target="_blank">https://reviewsa-exam.herokuapp.com/</a>
 
 ![image](https://user-images.githubusercontent.com/70557787/190352385-d6f72f53-313d-4662-aae2-17113932221a.png)
 
