@@ -23,7 +23,7 @@
               <% b.reviews.average(:evaluation).round.times do %>
                 ★
               <% end %>
-              &nbsp;(<%= b.reviews.average(:evaluation) %>&nbsp;/<%= b.reviews.count(:evaluation) %>人)<br>
+              &nbsp;(<%= b.reviews.average(:evaluation).round(1) %>&nbsp;/<%= b.reviews.count(:evaluation) %>人)<br>
             <% end %>
             参考書名：<%= b.name %><br>
             価格&emsp;&emsp;：<%= b.price %>円
