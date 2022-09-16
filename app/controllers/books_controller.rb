@@ -4,7 +4,13 @@ class BooksController < ApplicationController
   before_action :correct_book, only: :edit
 
   def index
-    @q = Book.ransack(params[:q])
+    if params[:q].present?
+      keywords = params[:q]['name_cont'].split(/[\p{blank}\s]+/)
+      grouping_hash = keywords.reduce({}){|hash, word| hash.merge(word => { name_cont: word })}
+      @q = Book.ransack({ combinator: 'and', groupings: grouping_hash })
+    else
+      @q = Book.ransack(params[:q])
+    end
     @books = @q.result(distinct: true).page(params[:page]).per(7)
   end
 

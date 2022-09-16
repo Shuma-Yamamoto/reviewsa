@@ -7,7 +7,13 @@ class SubjectsController < ApplicationController
 
   def show
     @subject = Subject.find(params[:id])
-    @q = Book.where(subject_id: @subject.id).ransack(params[:q])
+    if params[:q].present?
+      keywords = params[:q]['name_cont'].split(/[\p{blank}\s]+/)
+      grouping_hash = keywords.reduce({}){|hash, word| hash.merge(word => { name_cont: word })}
+      @q = Book.where(subject_id: @subject.id).ransack({ combinator: 'and', groupings: grouping_hash })
+    else
+      @q = Book.where(subject_id: @subject.id).ransack(params[:q])
+    end
     @books = @q.result(distinct: true).page(params[:page]).per(7)
   end
 end

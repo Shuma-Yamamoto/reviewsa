@@ -18,8 +18,13 @@
       <div class="card border-dark mb-3" style="width: 100%;">
         <%= link_to book_path(id:b.id), class: "text-decoration-none text-dark" do %>
           <div class="mt-1 mb-1 ms-2">
+            平均評価（5段階）：
+            <% b.reviews.average(:evaluation).round.times do %>
+              ★
+            <% end %>
+            &nbsp;(<%= b.reviews.average(:evaluation) %>&nbsp;/<%= b.reviews.count(:evaluation) %>人)<br>
             参考書名：<%= b.name %><br>
-            価格&emsp;&emsp;：<%= b.price %>円
+            価格&emsp;&emsp;：<%= b.price %>円.
           </div>
         <% end %>
       </div>
