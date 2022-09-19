@@ -1,15 +1,19 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'review_thanks/index'
-  get 'home/top'
-  root "home#top"
+  root to: 'top#index'
 
+  resources :top, only: :index
   resources :univ_my_pages, only: :show
   resources :subjects, only: [:index, :show]
   resources :books, only: [:index, :show, :edit, :update]
   resources :reviews, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :review_thanks, only: :index
+
+  post 'favorite_books/:id', to: 'favorite_books#create', as: 'create_favorite_book'
+  delete 'favorite_books/:id', to: 'favorite_books#destroy', as: 'destroy_favorite_book'
+  post 'favorite_reviews/:id', to: 'favorite_reviews#create', as: 'create_favorite_review'
+  delete 'favorite_reviews/:id', to: 'favorite_reviews#destroy', as: 'destroy_favorite_review'
 
   devise_for :university_students
   devise_for :examinees

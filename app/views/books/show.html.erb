@@ -7,11 +7,21 @@
 </div>
 
 <div class="mt-2">
-  価格：<%= @book.price %>円
+  &nbsp;価格：<%= @book.price %>円
 </div>
 
 <div class="mt-1">
-  <%= link_to '参考書詳細', @book.url, target: :_blank, rel: "noopener noreferrer" %>
+  &nbsp;<%= link_to '参考書詳細', @book.url, target: :_blank, rel: "noopener noreferrer" %>
+</div>
+
+<div class="mt-2">
+  <% if examinee_signed_in? %>
+    <% if FavoriteBook.where(examinee_id: current_examinee.id, book_id: @book.id).exists? %>
+      <%= button_to "お気に入り削除", destroy_favorite_book_path(@book.id), method: :delete, class: 'btn btn-outline-danger mr-3' %>
+    <% else %>
+      <%= button_to "お気に入り追加", create_favorite_book_path(@book.id), method: :post, class: 'btn btn-outline-primary mr-3' %>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="mt-4">
