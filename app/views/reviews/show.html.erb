@@ -188,6 +188,16 @@
   </div>
 </div>
 
+<div class="mt-3 ms-1">
+  <% if examinee_signed_in? %>
+    <% if FavoriteReview.where(examinee_id: current_examinee.id, review_id: @review.id).exists? %>
+      <%= button_to "お気に入り削除", destroy_favorite_review_path(@review.id), method: :delete, class: 'btn btn-outline-danger mr-3' %>
+    <% else %>
+      <%= button_to "お気に入り追加", create_favorite_review_path(@review.id), method: :post, class: 'btn btn-outline-primary mr-3' %>
+    <% end %>
+  <% end %>
+</div>
+
 <div class="mt-3">
   <%= link_to 'この人の他のレビューも見る', univ_my_page_path(id: @review.university_student_id) %>
 </div>

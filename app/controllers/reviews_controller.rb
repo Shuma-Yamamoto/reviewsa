@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @review.university_student_id = current_university_student.id
     if @review.save
-      redirect_to review_thanks_index_url
+      redirect_to review_thanks_url
     else
       @book = Book.find(@review.book_id)
       render 'new'
@@ -35,7 +35,7 @@ class ReviewsController < ApplicationController
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
-      redirect_to review_thanks_index_url
+      redirect_to review_thanks_url
     else
       @book = Book.find(@review.book_id)
       render 'edit'
