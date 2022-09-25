@@ -11,8 +11,11 @@ Rails.application.routes.draw do
   resources :review_thanks, only: :index
 
   post 'favorite_books/:id', to: 'favorite_books#create', as: 'create_favorite_book'
+  get 'favorite_books_list/:id', to: 'favorite_books#show', as: 'favorite_books_list'
   delete 'favorite_books/:id', to: 'favorite_books#destroy', as: 'destroy_favorite_book'
+
   post 'favorite_reviews/:id', to: 'favorite_reviews#create', as: 'create_favorite_review'
+  get 'favorite_reviews_list/:id', to: 'favorite_reviews#show', as: 'favorite_reviews_list'
   delete 'favorite_reviews/:id', to: 'favorite_reviews#destroy', as: 'destroy_favorite_review'
 
   devise_for :university_students

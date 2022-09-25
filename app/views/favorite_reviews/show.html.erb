@@ -1,0 +1,33 @@
+<div class="mt-3">
+  <h2>マイリスト</h2>
+</div>
+
+<h4 class="mt-4">お気に入りのレビュー</h4>
+
+<% if @favorite.present? %>
+  <% @favorite.each do |f| %>
+    <div class="card border-dark mb-3" style="width: 100%;">
+      <%= link_to review_path(id:f.review_id), class: "text-decoration-none text-dark" do %>
+        <div class="mt-1 mb-1 ms-2">
+          総合評価（5段階）：
+          <% f.review.evaluation.times do %>
+            ★
+          <% end %><br>
+          参考書名：<%= f.review.book.name %><br>
+          <%= f.review.university_student.university.full_name %>&nbsp;
+          <%= f.review.university_student.name %>さんのレビュー
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  お気に入りのレビューはありません。
+<% end %>
+
+<div class="mt-4">
+  <%= paginate @favorite %>
+</div>
+
+<div class="mt-3">
+  <%= link_to 'お気に入りの参考書を見る', favorite_books_list_path(id:current_examinee.id) %>
+</div>

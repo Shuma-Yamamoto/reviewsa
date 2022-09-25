@@ -34,7 +34,7 @@
 
     <% elsif examinee_signed_in? %>
       <div class="card border-secondary rounded-0" style="width: 100%;">
-        <%= link_to subjects_path, class: "text-decoration-none text-dark" do %>
+        <%= link_to favorite_books_list_path(id:current_examinee.id), class: "text-decoration-none text-dark" do %>
           <div class="card-body">
             <p class="card-text" align="center">
               <%= image_tag asset_path('favorite.png'), height: "25px", class: "d-inline-block align-top", alt: 'マイページ' %>

@@ -6,7 +6,7 @@ class UnivMyPagesController < ApplicationController
     @exam = ExamSubject.where(university_student_id: @univ.id)
     @cram = CramHistory.find_by(university_student_id: @univ.id)
     @q = @univ.reviews.ransack(params[:q])
-    @reviews = @q.result(distinct: true).page(params[:page]).per(3)
+    @reviews = @q.result(distinct: true).page(params[:page]).per(5)
   end
 
   # private
