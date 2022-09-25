@@ -1,5 +1,4 @@
 class UnivMyPagesController < ApplicationController
-  before_action :authenticate_any!
   # before_action :correct_my_page
 
   def show

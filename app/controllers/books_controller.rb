@@ -1,5 +1,4 @@
 class BooksController < ApplicationController
-  before_action :authenticate_any!, only: :show
   before_action :authenticate_university_student!, only: [:index, :edit, :update]
   before_action :correct_book, only: :edit
 

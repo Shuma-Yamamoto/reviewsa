@@ -16,11 +16,35 @@
         <%= image_tag asset_path('reviewsa.png'), height: "100px", class: "d-inline-block align-top" %>
       <% end %>
       <ol class="breadcrumb" style="margin: 0; padding: 0;">
-        <li class="breadcrumb-item" style="margin-top: 70px;">
-          <%= link_to 'Top', subjects_path %>
+        <li class="breadcrumb-item" style="margin-top: 50px;">
+          <% if university_student_signed_in? %>
+            大学生ログイン中：
+            <%= UniversityStudent.find(current_university_student.id).name %>さん
+            <div align="right">
+              <%= link_to 'ログアウト', university_students_sign_out_path %>
+            </div>
+          <% elsif examinee_signed_in? %>
+            受験生ログイン中：
+            <%= Examinee.find(current_examinee.id).name %>さん
+            <div align="right">
+              <%= link_to 'ログアウト', examinees_sign_out_path %>
+            </div>
+          <% else %>
+            ログインしていません
+            <div align="right">
+              <%= link_to 'ログイン', top_index_path %>
+            </div>
+          <% end %>
         </li>&nbsp;
       </ol>
     </nav>
     <%= yield %>
+    <% if university_student_signed_in? %>
+      <%= render 'layouts/footer_after_auth' %>
+    <% elsif examinee_signed_in? %>
+      <%= render 'layouts/footer_after_auth' %>
+    <% else %>
+      <%= render 'layouts/footer_before_auth' %>
+    <% end %>
   </body>
 </html>
