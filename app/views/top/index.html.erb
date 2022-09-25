@@ -28,6 +28,7 @@
       </div>
     <% end %>
   </div>
+  <div class="card-footer">お気に入りの参考書やレビューをマイリストに登録することができます。</div>
 </div>
 
 <div class="card mt-5">
@@ -49,6 +50,10 @@
       </div>
     <% end %>
   </div>
+  <div class="card-footer">受験生のために参考書のレビューを投稿することができます。</div>
 </div>
 
-<%= render 'layouts/footer_before_auth' %>
+<div class="mt-4 ms-1">
+  <%= link_to 'ログインせずに利用する', subjects_path %><br>
+  (一部の機能を利用することができません。)
+</div>

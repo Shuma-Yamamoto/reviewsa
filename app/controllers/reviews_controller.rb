@@ -1,5 +1,4 @@
 class ReviewsController < ApplicationController
-  before_action :authenticate_any!, only: :show
   before_action :authenticate_university_student!, only: [:new, :create, :edit, :update, :destroy]
   before_action :up_to_one, only: :new
   before_action :correct_review, only: :edit
