@@ -20,11 +20,9 @@
           <div class="mt-1 mb-1 ms-2">
             <% if b.reviews.present? %>
               平均評価（5段階）：
-              <%# b.reviews.average(:evaluation).round.times do %>
               <% @review_avgs[b.id].round.times do %>
                 ★
               <% end %>
-<!--              &nbsp;(<%#= b.reviews.average(:evaluation).round(1) %>&nbsp;/<%#= b.reviews.count(:evaluation) %>人)<br>-->
               &nbsp;(<%= @review_avgs[b.id].round(1) %>&nbsp;/<%= @review_cnts[b.id] %>人)<br>
             <% end %>
             参考書名：<%= b.name %><br>

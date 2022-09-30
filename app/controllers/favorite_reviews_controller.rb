@@ -24,7 +24,7 @@ class FavoriteReviewsController < ApplicationController
 
   private
   def correct_favorite
-    @examinee = Examinee.eager_load(:favorite_reviews).find(params[:id])
+    @examinee = Examinee.find(params[:id])
     unless @examinee.id == current_examinee.id
       redirect_to subjects_path
     end

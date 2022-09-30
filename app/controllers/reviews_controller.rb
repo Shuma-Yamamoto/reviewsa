@@ -66,7 +66,7 @@ class ReviewsController < ApplicationController
   end
 
   def correct_review
-    @review = Review.eager_load(:book).find(params[:id])
+    @review = Review.find(params[:id])
     unless @review.university_student_id == current_university_student.id
       redirect_to subjects_path
     end
