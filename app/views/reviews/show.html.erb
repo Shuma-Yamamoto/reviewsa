@@ -10,109 +10,7 @@
   ニックネーム：<%= @univ_student.name %>
 </div>
 
-<h5 class="mt-3">
-  大学について
-</h5>
-
-<div class="mt-2">
-  大学：<%= @univ_student.university.full_name %>
-</div>
-
-<div class="mt-1">
-  入学年度：<%= @univ_student.entrance_at %>年
-</div>
-
-<div class="mt-3">
-  受験科目：
-  <% @exam_sub.each do |e| %>
-    <div>
-      <% if e.subject_id == 1 %>
-        &nbsp;英語
-        <% next %>
-      <% elsif e.subject_id == 8 %>
-        &nbsp;数学
-        <% next %>
-      <% elsif e.subject_id.between?(9,11) %>
-        &nbsp;<%= e.subject.name %>
-        <% next %>
-      <% elsif e.subject_id.between?(13,16) %>
-        &nbsp;<%= e.subject.name %>
-        <% next %>
-      <% elsif e.subject_id.between?(17,20) %>
-        &nbsp;<%= e.subject.name %>
-        <% next %>
-      <% elsif e.subject_id == 21 %>
-        &nbsp;小論文
-        <% next %>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-
-<div class="mt-3">
-  合格ステータス：
-  <% if @univ_student.ronin == 0 %>
-    現役合格
-  <% else %>
-    <%= @univ_student.ronin %>浪で合格
-  <% end %>
-</div>
-
-<h5 class="mt-4">
-  高校について
-</h5>
-
-<div class="mt-2">
-  高校：
-  <% if @univ_student.anonymous_high_school == false %>
-    <%= @univ_student.high_school.name %>
-  <% else %>
-    非公開
-  <% end %>
-</div>
-
-<div class="mt-1">
-  高校偏差値：<%= @univ_student.high_school.score %>
-</div>
-
-<div class="mt-3">
-  部活の入部時期：
-  <% if @univ_student.join_club_at.present? %>
-    <%= @univ_student.join_club_at.strftime("%Y年%-m月") %>
-  <% end %>
-</div>
-
-<div class="mt-1">
-  部活の退部/引退時期：
-  <% if @univ_student.leave_club_at.present? %>
-    <%= @univ_student.leave_club_at.strftime("%Y年%-m月") %>
-  <% end %>
-</div>
-
-<div class="mt-1">
-  部活の活動頻度：
-  <% if @univ_student.club_frequency.present? %>
-    週<%= @univ_student.club_frequency %>回
-  <% end %>
-</div>
-
-<div class="mt-3">
-  通っていた塾：<%= @cram_hist.cram_school.name %>
-</div>
-
-<div class="mt-1">
-  入塾時期：
-  <% if @cram_hist.join_at.present? %>
-    <%= @cram_hist.join_at.strftime("%Y年%-m月") %>
-  <% end %>
-</div>
-
-<div class="mt-1">
-  退塾/卒塾時期：
-  <% if @cram_hist.leave_at.present? %>
-    <%= @cram_hist.leave_at.strftime("%Y年%-m月") %>
-  <% end %>
-</div>
+<%= render 'layouts/univ_bio' %>
 
 <div class="mt-4">
   <h4>レビュー詳細</h4>
@@ -120,40 +18,27 @@
 
 <div class="mt-2">
   総合評価（5段階）：
-  <% @review.evaluation.times do %>
-    ★
-  <% end %>
+  <% @review.evaluation.times do %>★<% end %>
 </div>
-
 
 <div class="mt-3">
   使い始めた時期：<%= @review.begin_about_i18n %>
-  <% if @review.begin_month.present? %>
-    の<%= @review.begin_month %>月
-  <% elsif @review.begin_season.present? %>
-    の<%= @review.begin_season %>
-  <% end %>
+  <%= "#{@review.begin_season_i18n}" if @review.begin_season.present? %>
+  <%= "(#{@review.begin_month}月)" if @review.begin_month.present? %>
 </div>
 
 <div class="mt-1">
   使い終えた時期：<%= @review.finish_about_i18n %>
-  <% if @review.finish_month.present? %>
-    の<%= @review.finish_month %>月
-  <% elsif @review.finish_season.present? %>
-    の<%= @review.finish_season %>
-  <% end %>
+  <%= "#{@review.finish_season_i18n}" if @review.finish_season.present? %>
+  <%= "(#{@review.finish_month}月)" if @review.finish_month.present? %>
 </div>
 
 <div class="mt-3">
-  使い始めたときの偏差値：<% if @review.beginning_score.present? %>
-    <%= @review.beginning_score %>
-  <% end %>
+  使い始めたときの偏差値：<%= @review.beginning_score if @review.beginning_score.present? %>
 </div>
 
 <div class="mt-1">
-  模試：<% if @review.mock_exam_id.present? %>
-    <%= @review.mock_exam.name %>
-  <% end %>
+  模試：<%= @review.mock_exam.name if @review.mock_exam_id.present? %>
 </div>
 
 <div class="mt-3">この参考書の良い点</div>
@@ -190,11 +75,9 @@
 
 <div class="mt-3 ms-1">
   <% if examinee_signed_in? %>
-    <% if FavoriteReview.where(examinee_id: current_examinee.id, review_id: @review.id).exists? %>
-      <%= button_to "お気に入り削除", destroy_favorite_review_path(@review.id), method: :delete, class: 'btn btn-outline-danger mr-3' %>
-    <% else %>
-      <%= button_to "お気に入り追加", create_favorite_review_path(@review.id), method: :post, class: 'btn btn-outline-primary mr-3' %>
-    <% end %>
+    <%= FavoriteReview.where(examinee_id: @examinee.id, review_id: @review.id).exists? ?
+          (button_to "お気に入り削除", destroy_favorite_review_path(@review.id), method: :delete, class: 'btn btn-outline-danger mr-3')
+          : (button_to "お気に入り追加", create_favorite_review_path(@review.id), method: :post, class: 'btn btn-outline-primary mr-3') %>
   <% end %>
 </div>
 

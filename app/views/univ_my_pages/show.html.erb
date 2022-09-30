@@ -6,109 +6,7 @@
   <%= @univ_student.name %>さんのプロフィール
 </h4>
 
-<h5 class="mt-4">
-  大学について
-</h5>
-
-<div class="mt-2">
-  大学：<%= @univ_student.university.full_name %>
-</div>
-
-<div class="mt-1">
-  入学年度：<%= @univ_student.entrance_at %>年
-</div>
-
-<div class="mt-3">
-  受験科目：
-  <% @exam_sub.each do |e| %>
-    <div>
-      <% if e.subject_id == 1 %>
-        &nbsp;英語
-        <% next %>
-      <% elsif e.subject_id == 8 %>
-        &nbsp;数学
-        <% next %>
-      <% elsif e.subject_id.between?(9,11) %>
-        &nbsp;<%= e.subject.name %>
-        <% next %>
-      <% elsif e.subject_id.between?(13,16) %>
-        &nbsp;<%= e.subject.name %>
-        <% next %>
-      <% elsif e.subject_id.between?(17,20) %>
-        &nbsp;<%= e.subject.name %>
-        <% next %>
-      <% elsif e.subject_id == 21 %>
-        &nbsp;小論文
-        <% next %>
-      <% end %>
-    </div>
-  <% end %>
-</div>
-
-<div class="mt-3">
-  合格ステータス：
-  <% if @univ_student.ronin == 0 %>
-    現役合格
-  <% else %>
-    <%= @univ_student.ronin %>浪で合格
-  <% end %>
-</div>
-
-<h5 class="mt-4">
-  高校について
-</h5>
-
-<div class="mt-2">
-  高校：
-  <% if @univ_student.anonymous_high_school == false %>
-    <%= @univ_student.high_school.name %>
-  <% else %>
-    非公開
-  <% end %>
-</div>
-
-<div class="mt-1">
-  高校偏差値：<%= @univ_student.high_school.score %>
-</div>
-
-<div class="mt-3">
-  部活の入部時期：
-  <% if @univ_student.join_club_at.present? %>
-    <%= @univ_student.join_club_at.strftime("%Y年%-m月") %>
-  <% end %>
-</div>
-
-<div class="mt-1">
-  部活の退部/引退時期：
-  <% if @univ_student.leave_club_at.present? %>
-    <%= @univ_student.leave_club_at.strftime("%Y年%-m月") %>
-  <% end %>
-</div>
-
-<div class="mt-1">
-  部活の活動頻度：
-  <% if @univ_student.club_frequency.present? %>
-    週<%= @univ_student.club_frequency %>回
-  <% end %>
-</div>
-
-<div class="mt-3">
-  通っていた塾：<%= @cram_hist.cram_school.name %>
-</div>
-
-<div class="mt-1">
-  入塾時期：
-  <% if @cram_hist.join_at.present? %>
-    <%= @cram_hist.join_at.strftime("%Y年%-m月") %>
-  <% end %>
-</div>
-
-<div class="mt-1">
-  退塾/卒塾時期：
-  <% if @cram_hist.leave_at.present? %>
-    <%= @cram_hist.leave_at.strftime("%Y年%-m月") %>
-  <% end %>
-</div>
+<%= render 'layouts/univ_bio' %>
 
 <h4 class="mt-4">
   <%= @univ_student.name %>さんのレビュー
@@ -118,20 +16,18 @@
   <div class="card border-dark mb-3" style="width: 100%;">
     <%= link_to review_path(id:r.id), class: "text-decoration-none text-dark" do %>
       <div class="mt-1 mb-1 ms-2">
-        総合評価：
-        <% r.evaluation.times do %>
-          ★
-        <% end %><br>
+        総合評価：<% r.evaluation.times do %>★<% end %><br>
         「<%= r.book.name %>」のレビュー
-        <% begin %>
+
+        <% if university_student_signed_in? %>
           <% if r.university_student_id == current_university_student.id %>
             <div class="d-flex justify-content-left mt-1 mb-1">
               <%= link_to "編集", edit_review_path(id:r.id), class: 'btn btn-outline-primary mr-3' %>&nbsp;
               <%= button_to "削除", review_path(r.id), method: :delete, class: 'btn btn-outline-danger' %>
             </div>
           <% end %>
-        <% rescue %>
         <% end %>
+
       </div>
     <% end %>
   </div>

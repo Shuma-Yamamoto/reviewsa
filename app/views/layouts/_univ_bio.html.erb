@@ -1,0 +1,58 @@
+<h5 class="mt-3">
+  大学について
+</h5>
+
+<div class="mt-2">
+  大学：<%= @univ_student.university.full_name %>
+</div>
+
+<div class="mt-1">
+  入学年度：<%= @univ_student.entrance_at %>年
+</div>
+
+<div class="mt-3">
+  受験科目：
+  <% @exam_sub.each do |e| %>
+    <div><%= get_subject(e.subject_id) %></div>
+  <% end %>
+</div>
+
+<div class="mt-3">
+  合格ステータス：<%= (@univ_student.ronin == 0) ? "現役合格" : "#{@univ_student.ronin}浪で合格" %>
+</div>
+
+<h5 class="mt-4">
+  高校について
+</h5>
+
+<div class="mt-2">
+  高校：<%= @univ_student.anonymous_high_school ? "非公開" : @univ_student.high_school.name %>
+</div>
+
+<div class="mt-1">
+  高校偏差値：<%= @univ_student.high_school.score %>
+</div>
+
+<div class="mt-3">
+  部活の入部時期：<%= @univ_student.join_club_at.strftime("%Y年%-m月") if @univ_student.join_club_at.present? %>
+</div>
+
+<div class="mt-1">
+  部活の退部/引退時期：<%= @univ_student.leave_club_at.strftime("%Y年%-m月") if @univ_student.leave_club_at.present? %>
+</div>
+
+<div class="mt-1">
+  部活の活動頻度：<%= "週#{@univ_student.club_frequency}回" if @univ_student.club_frequency.present? %>
+</div>
+
+<div class="mt-3">
+  通っていた塾：<%= @cram_hist.cram_school.name %>
+</div>
+
+<div class="mt-1">
+  入塾時期：<%= @cram_hist.join_at.strftime("%Y年%-m月") if @cram_hist.join_at.present? %>
+</div>
+
+<div class="mt-1">
+  退塾/卒塾時期：<%= @cram_hist.leave_at.strftime("%Y年%-m月") if @cram_hist.leave_at.present? %>
+</div>

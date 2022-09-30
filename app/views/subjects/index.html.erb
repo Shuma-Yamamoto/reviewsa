@@ -2,90 +2,9 @@
   <h2>参考書を探す</h2>
 </div>
 
-<div class="card mt-4">
-  <h3 class="card-header">英語</h3>
-  <div class="card-body">
-    <% @subjects[0..6].each do |sub| %>
-      <%= link_to subject_path(id:sub.id), class: "text-decoration-none" do %>
-        <div class="d-grid col-11 mx-auto mb-2">
-          <button class="btn btn-outline-primary" type="button">
-            <div align="center"><%= sub.name %></div>
-          </button>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-<div class="card mt-4">
-  <h3 class="card-header">数学</h3>
-  <div class="card-body">
-    <%= link_to subject_path(id:@subjects[7].id), class: "text-decoration-none" do %>
-      <div class="d-grid col-11 mx-auto mb-2">
-        <button class="btn btn-outline-primary" type="button">
-          <div align="center"><%= @subjects[7].name %></div>
-        </button>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="card mt-4">
-  <h3 class="card-header">国語</h3>
-  <div class="card-body">
-    <% @subjects[8..11].each do |sub| %>
-      <%= link_to subject_path(id:sub.id), class: "text-decoration-none" do %>
-        <div class="d-grid col-11 mx-auto mb-2">
-          <button class="btn btn-outline-primary" type="button">
-            <div align="center"><%= sub.name %></div>
-          </button>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-<div class="card mt-4">
-  <h3 class="card-header">理科</h3>
-  <div class="card-body">
-    <% @subjects[12..15].each do |sub| %>
-      <%= link_to subject_path(id:sub.id), class: "text-decoration-none" do %>
-        <div class="d-grid col-11 mx-auto mb-2">
-          <button class="btn btn-outline-primary" type="button">
-            <div align="center"><%= sub.name %></div>
-          </button>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-<div class="card mt-4">
-  <h3 class="card-header">社会</h3>
-  <div class="card-body">
-    <% @subjects[16..19].each do |sub| %>
-      <%= link_to subject_path(id:sub.id), class: "text-decoration-none" do %>
-        <div class="d-grid col-11 mx-auto mb-2">
-          <button class="btn btn-outline-primary" type="button">
-            <div align="center"><%= sub.name %></div>
-          </button>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-<div class="card mt-4">
-  <h3 class="card-header">社会</h3>
-  <div class="card-body">
-    <% @subjects[20..21].each do |sub| %>
-      <%= link_to subject_path(id:sub.id), class: "text-decoration-none" do %>
-        <div class="d-grid col-11 mx-auto mb-2">
-          <button class="btn btn-outline-primary" type="button">
-            <div align="center"><%= sub.name %></div>
-          </button>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
+<%= render 'layouts/subject', subject: "英語", a:0, b:6 %>
+<%= render 'layouts/subject', subject: "数学", a:7, b:7 %>
+<%= render 'layouts/subject', subject: "国語", a:8, b:11 %>
+<%= render 'layouts/subject', subject: "理科", a:12, b:15 %>
+<%= render 'layouts/subject', subject: "社会", a:16, b:19 %>
+<%= render 'layouts/subject', subject: "その他", a:20, b:21 %>

@@ -9,10 +9,8 @@ class University < ApplicationRecord
   has_many :university_students, dependent: :destroy
 
   def full_name
-    if self.department.nil?
-      self.name + " " + self.faculty + "学部"
-    else
-      self.name + " " + self.faculty + "学部 " + self.department + "学科"
-    end
+    self.department.nil? ?
+    "#{self.name} #{self.faculty}学部"
+    : "#{self.name} #{self.faculty}学部 #{self.department}学科"
   end
 end

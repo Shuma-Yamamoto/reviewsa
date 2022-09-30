@@ -1,0 +1,23 @@
+<div class="card mt-4">
+  <div class="mb-1">
+    <h3 class="card-header"><%= head %></h3>
+    <div class="card-body">
+      <%= link_to sign_up_path, class: "text-decoration-none" do %>
+        <div class="d-grid col-11 mx-auto">
+          <button class="btn btn-outline-primary" type="button">
+            <div align="center"><%= user %>ユーザ登録</div>
+          </button>
+        </div>
+      <% end %>
+
+      <%= link_to sign_in_path, class: "text-decoration-none" do %>
+        <div class="d-grid col-11 mx-auto mt-3">
+          <button class="btn btn-outline-primary" type="button">
+            <div align="center"><%= user %>ログイン</div>
+          </button>
+        </div>
+      <% end %>
+    </div>
+    <div class="card-footer"><%= foot %></div>
+  </div>
+</div>
