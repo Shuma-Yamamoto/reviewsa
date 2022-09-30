@@ -4,5 +4,5 @@ class HighSchool < ApplicationRecord
   validates :name, presence: true
 
   belongs_to :prefecture
-  has_many :university_students
+  has_many :university_students, dependent: :destroy
 end

@@ -3,15 +3,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :user_info
 
   protected
-  def authenticate_any!
-    if university_student_signed_in?
-      true
-    else
-      authenticate_examinee!
-    end
-  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up,
@@ -28,5 +22,21 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     subjects_path
+  end
+
+  def authenticate_any!
+    if university_student_signed_in?
+      true
+    else
+      authenticate_examinee!
+    end
+  end
+
+  def user_info
+    if university_student_signed_in?
+      @univ_student = UniversityStudent.find(current_university_student.id)
+    elsif examinee_signed_in?
+      @examinee = Examinee.find(current_examinee.id)
+    end
   end
 end

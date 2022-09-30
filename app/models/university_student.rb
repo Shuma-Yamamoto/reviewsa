@@ -16,13 +16,13 @@ class UniversityStudent < ApplicationRecord
 
   belongs_to :university
   belongs_to :high_school
-  has_many :fix_books
-  has_many :reviews
+  has_many :fix_books, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
-  has_many :cram_histories
+  has_many :cram_histories, dependent: :destroy
   accepts_nested_attributes_for :cram_histories
 
-  has_many :exam_subjects
+  has_many :exam_subjects, dependent: :destroy
   has_many :subjects, through: :exam_subjects
   accepts_nested_attributes_for :exam_subjects
 end

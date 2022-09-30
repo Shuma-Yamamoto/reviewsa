@@ -17,5 +17,5 @@ class Review < ApplicationRecord
   belongs_to :university_student
   belongs_to :book
   belongs_to :mock_exam, optional: true
-  has_many :favorite_reviews
+  has_many :favorite_reviews, dependent: :destroy
 end

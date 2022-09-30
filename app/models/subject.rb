@@ -4,6 +4,6 @@ class Subject < ApplicationRecord
   validates :name, presence: true
 
   has_many :books
-  has_many :exam_subjects
-  has_many :university_students, through: :exam_subjects
+  has_many :exam_subjects, dependent: :destroy
+  has_many :university_students, through: :exam_subjects, dependent: :destroy
 end

@@ -3,5 +3,5 @@
 class CramSchool < ApplicationRecord
   validates :name, presence: true
 
-  has_many :cram_histories
+  has_many :cram_histories, dependent: :destroy
 end

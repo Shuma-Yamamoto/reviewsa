@@ -3,8 +3,8 @@ class FavoriteBooksController < ApplicationController
   before_action :correct_favorite, only: :show
 
   def show
-    @exam = Examinee.find(params[:id])
-    @q = @exam.favorite_books.ransack(params[:q])
+    @examinee = Examinee.eager_load(favorite_books: :book).find(params[:id])
+    @q = @examinee.favorite_books.ransack(params[:q])
     @favorite = @q.result(distinct: true).page(params[:page]).per(5)
   end
 
@@ -23,8 +23,8 @@ class FavoriteBooksController < ApplicationController
 
   private
   def correct_favorite
-    @exam = Examinee.find(params[:id])
-    unless @exam.id == current_examinee.id
+    @examinee = Examinee.eager_load(:favorite_books).find(params[:id])
+    unless @examinee.id == current_examinee.id
       redirect_to subjects_path
     end
   end
