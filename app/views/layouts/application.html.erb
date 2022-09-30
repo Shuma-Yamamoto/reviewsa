@@ -19,13 +19,13 @@
         <li class="breadcrumb-item" style="margin-top: 50px;">
           <% if university_student_signed_in? %>
             大学生ログイン中：
-            <%= UniversityStudent.find(current_university_student.id).name %>さん
+            <%= @univ_student.name %>さん
             <div align="right">
               <%= link_to 'ログアウト', university_students_sign_out_path %>
             </div>
           <% elsif examinee_signed_in? %>
             受験生ログイン中：
-            <%= Examinee.find(current_examinee.id).name %>さん
+            <%= @examinee.name %>さん
             <div align="right">
               <%= link_to 'ログアウト', examinees_sign_out_path %>
             </div>

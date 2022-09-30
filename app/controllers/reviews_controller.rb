@@ -4,10 +4,12 @@ class ReviewsController < ApplicationController
   before_action :correct_review, only: :edit
 
   def show
-    @review = Review.find(params[:id])
-    @univ = @review.university_student
-    @exam = ExamSubject.where(university_student_id: @univ.id)
-    @cram = CramHistory.find_by(university_student_id: @univ.id)
+    @review = Review.eager_load(:book, :mock_exam, :university_student, university_student: :university,
+                                university_student: :high_school, university_student: { exam_subjects: :subject },
+                                university_student: { cram_histories: :cram_school }).find(params[:id])
+    @univ_student = @review.university_student
+    @exam_sub = @univ_student.exam_subjects
+    @cram_hist = @univ_student.cram_histories[0]
   end
 
   def new
@@ -27,8 +29,8 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:id])
-    @book = Book.find(@review.book_id)
+    @review = Review.eager_load(:book).find(params[:id])
+    @book = @review.book
   end
 
   def update

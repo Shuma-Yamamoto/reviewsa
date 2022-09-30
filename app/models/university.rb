@@ -6,7 +6,7 @@ class University < ApplicationRecord
   validates :domain, presence: true
   validates :url, presence: true
 
-  has_many :university_students
+  has_many :university_students, dependent: :destroy
 
   def full_name
     if self.department.nil?

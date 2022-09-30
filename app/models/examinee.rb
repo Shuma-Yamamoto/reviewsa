@@ -13,6 +13,6 @@ class Examinee < ApplicationRecord
 
   enum grade: { first: 0, second: 1, third: 2, ronin: 3 }, _prefix: true
 
-  has_many :favorite_reviews
-  has_many :favorite_books
+  has_many :favorite_reviews, dependent: :destroy
+  has_many :favorite_books, dependent: :destroy
 end

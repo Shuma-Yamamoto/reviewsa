@@ -15,9 +15,9 @@
   <h5 class="mb-2">検索結果</h5>
   <% @books.each do |b| %>
     <div class="card border-dark mb-3" style="width: 100%;">
-      <% @up_to_one = b.reviews.find_by(university_student_id: current_university_student.id, book_id: b.id) %>
-      <% if @up_to_one.present? %>
-        <%= link_to edit_review_path(id:@up_to_one.id), class: "text-decoration-none text-dark" do %>
+      <% if b.reviews.pluck(:university_student_id).include?(current_university_student.id) %>
+        <%= link_to edit_review_path(id:b.reviews.find_by(university_student_id: current_university_student.id).id),
+                    class: "text-decoration-none text-dark" do %>
           <div class="mt-1 mb-1 ms-2">
             参考書名：<%= b.name %><br>
             価格&emsp;&emsp;：<%= b.price %>円
