@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
   resources :top, only: :index
   resources :univ_my_pages, only: :show
-  resources :subjects, only: [:index, :show]
-  resources :books, only: [:index, :show, :edit, :update]
-  resources :reviews, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :subjects, only: %i[index show]
+  resources :books, only: %i[index show edit update]
+  resources :reviews, only: %i[show new create edit update destroy]
   resources :review_thanks, only: :index
 
   post 'favorite_books/:id', to: 'favorite_books#create', as: 'create_favorite_book'

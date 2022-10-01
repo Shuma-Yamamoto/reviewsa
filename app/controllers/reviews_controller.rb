@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 class ReviewsController < ApplicationController
-  before_action :authenticate_university_student!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_university_student!, only: %i[new create edit update destroy]
   before_action :up_to_one, only: :new
   before_action :correct_review, only: :edit
 
   def show
-    @review = Review.eager_load(:book, :mock_exam, :university_student, university_student: :university,
-                                university_student: :high_school, university_student: { exam_subjects: :subject },
-                                university_student: { cram_histories: :cram_school }).find(params[:id])
-    @univ_student = @review.university_student
-    @exam_sub = @univ_student.exam_subjects
-    @cram_hist = @univ_student.cram_histories[0]
+    @review = Review.eager_load(:book, :mock_exam, university_student:
+      [:university, :high_school, { exam_subjects: :subject }, { cram_histories: :cram_school }]).find(params[:id])
+    @page_student = @review.university_student
+    @exam_sub = @page_student.exam_subjects
+    @cram_hist = @page_student.cram_histories[0]
   end
 
   def new
@@ -60,15 +61,11 @@ class ReviewsController < ApplicationController
   def up_to_one
     @id = current_university_student.id
     @book = Book.find(params[:id])
-    if Review.find_by(university_student_id: @id, book_id: @book.id).present?
-      redirect_to subjects_path
-    end
+    redirect_to subjects_path if Review.find_by(university_student_id: @id, book_id: @book.id).present?
   end
 
   def correct_review
     @review = Review.find(params[:id])
-    unless @review.university_student_id == current_university_student.id
-      redirect_to subjects_path
-    end
+    redirect_to subjects_path unless @review.university_student_id == current_university_student.id
   end
 end

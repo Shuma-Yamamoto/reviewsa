@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubjectsController < ApplicationController
   def index
     @subjects = Subject.all
@@ -11,13 +13,6 @@ class SubjectsController < ApplicationController
     @review_avgs = @review_group.average(:evaluation)
     @review_cnts = @review_group.count(:evaluation)
 
-    if params[:q].present?
-      keywords = params[:q]['name_cont'].split(/[\p{blank}\s]+/)
-      grouping_hash = keywords.reduce({}){|hash, word| hash.merge(word => { name_cont: word })}
-      @q = @books.ransack({ combinator: 'and', groupings: grouping_hash })
-    else
-      @q = @books.ransack(params[:q])
-    end
-    @books = @q.result(distinct: true).page(params[:page]).per(7)
+    search_books
   end
 end

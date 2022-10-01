@@ -1,0 +1,24 @@
+require:
+  - rubocop
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 3.1
+  TargetRailsVersion: 7.0
+  NewCops: enable
+  Exclude:
+    - 'app/assets/images/*'
+    - 'bin/*'
+    - 'db/**/*'
+    - 'test/**/*'
+
+# Windows環境のためLFチェックを導入
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
+# クラスの説明がコメントで書かれていなくてもOKとする
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Max: 20

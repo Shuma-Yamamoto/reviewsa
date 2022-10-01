@@ -11,7 +11,7 @@ class UniversityStudent < ApplicationRecord
   validates :encrypted_password, presence: true
   validates :entrance_at, presence: true
   validates :ronin, presence: true
-  validates :anonymous_high_school, inclusion: {in: [true, false]}
+  validates :anonymous_high_school, inclusion: { in: [true, false] }
   validates :subject_ids, presence: true
 
   belongs_to :university
