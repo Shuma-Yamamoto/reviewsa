@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FavoriteBooksController < ApplicationController
   before_action :authenticate_examinee!
   before_action :correct_favorite, only: :show
@@ -22,10 +24,9 @@ class FavoriteBooksController < ApplicationController
   end
 
   private
+
   def correct_favorite
     @examinee = Examinee.find(params[:id])
-    unless @examinee.id == current_examinee.id
-      redirect_to subjects_path
-    end
+    redirect_to subjects_path unless @examinee.id == current_examinee.id
   end
 end

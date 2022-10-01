@@ -9,5 +9,7 @@ class AddColumnToUniversityStudent < ActiveRecord::Migration[7.0]
     add_column :university_students, :join_club_at, :date
     add_column :university_students, :leave_club_at, :date
     add_column :university_students, :club_frequency, :integer
+
+    add_index :university_students, [:name], unique: true
   end
 end

@@ -1,17 +1,12 @@
+# frozen_string_literal: true
+
 class BooksController < ApplicationController
-  before_action :authenticate_university_student!, only: [:index, :edit, :update]
+  before_action :authenticate_university_student!, only: %i[index edit update]
   before_action :correct_book, only: :edit
 
   def index
     @books = Book.all.eager_load(reviews: :university_student)
-    if params[:q].present?
-      keywords = params[:q]['name_cont'].split(/[\p{blank}\s]+/)
-      grouping_hash = keywords.reduce({}){|hash, word| hash.merge(word => { name_cont: word })}
-      @q = @books.ransack({ combinator: 'and', groupings: grouping_hash })
-    else
-      @q = @books.ransack(params[:q])
-    end
-    @books = @q.result(distinct: true).page(params[:page]).per(7)
+    search_books
   end
 
   def show
@@ -26,7 +21,7 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-      redirect_to new_review_url(id:@book.id)
+      redirect_to new_review_url(id: @book.id)
     else
       render 'edit'
     end
@@ -40,8 +35,6 @@ class BooksController < ApplicationController
 
   def correct_book
     @book = Book.find(params[:id])
-    if @book.subject_id.present?
-      redirect_to subjects_path
-    end
+    redirect_to subjects_path if @book.subject_id.present?
   end
 end

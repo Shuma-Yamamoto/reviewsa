@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class FavoriteReviewsController < ApplicationController
   before_action :authenticate_examinee!
   before_action :correct_favorite, only: :show
 
   def show
-    @examinee = Examinee.eager_load(favorite_reviews: { review: :book },
-                                    favorite_reviews: [review: { university_student: :university}]).find(params[:id])
+    @examinee = Examinee.eager_load(favorite_reviews:
+                                      { review: [:book, { university_student: :university }] }).find(params[:id])
     @q = @examinee.favorite_reviews.ransack(params[:q])
     @favorite = @q.result(distinct: true).page(params[:page]).per(5)
   end
@@ -23,10 +25,9 @@ class FavoriteReviewsController < ApplicationController
   end
 
   private
+
   def correct_favorite
     @examinee = Examinee.find(params[:id])
-    unless @examinee.id == current_examinee.id
-      redirect_to subjects_path
-    end
+    redirect_to subjects_path unless @examinee.id == current_examinee.id
   end
 end

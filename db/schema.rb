@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_060114) do
     t.string "name", null: false
     t.integer "grade", null: false
     t.index ["email"], name: "index_examinees_on_email", unique: true
+    t.index ["name"], name: "index_examinees_on_name", unique: true
     t.index ["reset_password_token"], name: "index_examinees_on_reset_password_token", unique: true
   end
 
@@ -168,6 +169,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_060114) do
     t.integer "club_frequency"
     t.index ["email"], name: "index_university_students_on_email", unique: true
     t.index ["high_school_id"], name: "index_university_students_on_high_school_id"
+    t.index ["name"], name: "index_university_students_on_name", unique: true
     t.index ["reset_password_token"], name: "index_university_students_on_reset_password_token", unique: true
     t.index ["university_id"], name: "index_university_students_on_university_id"
   end

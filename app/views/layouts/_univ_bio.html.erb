@@ -3,11 +3,11 @@
 </h5>
 
 <div class="mt-2">
-  大学：<%= @univ_student.university.full_name %>
+  大学：<%= @page_student.university.full_name %>
 </div>
 
 <div class="mt-1">
-  入学年度：<%= @univ_student.entrance_at %>年
+  入学年度：<%= @page_student.entrance_at %>年
 </div>
 
 <div class="mt-3">
@@ -18,7 +18,7 @@
 </div>
 
 <div class="mt-3">
-  合格ステータス：<%= (@univ_student.ronin == 0) ? "現役合格" : "#{@univ_student.ronin}浪で合格" %>
+  合格ステータス：<%= (@page_student.ronin == 0) ? "現役合格" : "#{@page_student.ronin}浪で合格" %>
 </div>
 
 <h5 class="mt-4">
@@ -26,23 +26,23 @@
 </h5>
 
 <div class="mt-2">
-  高校：<%= @univ_student.anonymous_high_school ? "非公開" : @univ_student.high_school.name %>
+  高校：<%= @page_student.anonymous_high_school ? "非公開" : @page_student.high_school.name %>
 </div>
 
 <div class="mt-1">
-  高校偏差値：<%= @univ_student.high_school.score %>
+  高校偏差値：<%= @page_student.high_school.score %>
 </div>
 
 <div class="mt-3">
-  部活の入部時期：<%= @univ_student.join_club_at.strftime("%Y年%-m月") if @univ_student.join_club_at.present? %>
+  部活の入部時期：<%= @page_student.join_club_at.strftime("%Y年%-m月") if @page_student.join_club_at.present? %>
 </div>
 
 <div class="mt-1">
-  部活の退部/引退時期：<%= @univ_student.leave_club_at.strftime("%Y年%-m月") if @univ_student.leave_club_at.present? %>
+  部活の退部/引退時期：<%= @page_student.leave_club_at.strftime("%Y年%-m月") if @page_student.leave_club_at.present? %>
 </div>
 
 <div class="mt-1">
-  部活の活動頻度：<%= "週#{@univ_student.club_frequency}回" if @univ_student.club_frequency.present? %>
+  部活の活動頻度：<%= "週#{@page_student.club_frequency}回" if @page_student.club_frequency.present? %>
 </div>
 
 <div class="mt-3">
