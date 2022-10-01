@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
-  before_action :authenticate_university_student!,
-                only: %i[index
-                         edit update]
-  before_action :correct_book,
-                only: :edit
+  before_action :authenticate_university_student!, only: %i[index edit update]
+  before_action :correct_book, only: :edit
 
   def index
     @books = Book.all.eager_load(reviews: :university_student)
