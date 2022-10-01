@@ -11,3 +11,13 @@ ja:
         second: 高校2年
         third: 高校3年
         ronin: 浪人期
+      begin_season:
+        spring: 春
+        summer: 夏
+        autumn: 秋
+        winter: 冬
+      finish_season:
+        spring: 春
+        summer: 夏
+        autumn: 秋
+        winter: 冬

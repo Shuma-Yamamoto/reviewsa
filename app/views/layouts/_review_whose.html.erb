@@ -1,0 +1,10 @@
+<div class="card border-dark mb-3" style="width: 100%;">
+  <%= link_to review_path(id:r.id), class: "text-decoration-none text-dark" do %>
+    <div class="mt-1 mb-1 ms-2">
+      総合評価（5段階）：<% r.evaluation.times do %>★<% end %><br>
+      参考書名：<%= r.book.name %><br>
+      <%= r.university_student.university.full_name %>&nbsp;
+      <%= r.university_student.name %>さんのレビュー
+    </div>
+  <% end %>
+</div>

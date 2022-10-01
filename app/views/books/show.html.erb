@@ -16,11 +16,9 @@
 
 <div class="mt-2">
   <% if examinee_signed_in? %>
-    <% if FavoriteBook.where(examinee_id: current_examinee.id, book_id: @book.id).exists? %>
-      <%= button_to "お気に入り削除", destroy_favorite_book_path(@book.id), method: :delete, class: 'btn btn-outline-danger mr-3' %>
-    <% else %>
-      <%= button_to "お気に入り追加", create_favorite_book_path(@book.id), method: :post, class: 'btn btn-outline-primary mr-3' %>
-    <% end %>
+    <%= FavoriteBook.where(examinee_id: @examinee.id, book_id: @book.id).exists? ?
+          (button_to "お気に入り削除", destroy_favorite_book_path(@book.id), method: :delete, class: 'btn btn-outline-danger mr-3')
+          : (button_to "お気に入り追加", create_favorite_book_path(@book.id), method: :post, class: 'btn btn-outline-primary mr-3') %>
   <% end %>
 </div>
 
@@ -30,23 +28,13 @@
 
 <% if @reviews.present? %>
   <% @reviews.each do |r| %>
-    <div class="card border-dark mb-3" style="width: 100%;">
-      <%= link_to review_path(id:r.id), class: "text-decoration-none text-dark" do %>
-        <div class="mt-1 mb-1 ms-2">
-          総合評価（5段階）：
-          <% r.evaluation.times do %>
-            ★
-          <% end %><br>
-          <%= r.university_student.university.full_name %>&nbsp;
-          <%= r.university_student.name %>さんのレビュー
-        </div>
-      <% end %>
-    </div>
+    <%= render 'layouts/review_whose', r: r %>
   <% end %>
 
   <div class="mt-4">
     <%= paginate @reviews %>
   </div>
+
 <% else %>
   <p class="mt-2">この参考書には、まだレビューがないようです。</p>
 <% end %>

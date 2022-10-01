@@ -1,0 +1,14 @@
+<div class="card mt-4">
+  <h3 class="card-header"><%= subject %></h3>
+  <div class="card-body">
+    <% @subjects[a..b].each do |sub| %>
+      <%= link_to subject_path(id:sub.id), class: "text-decoration-none" do %>
+        <div class="d-grid col-11 mx-auto mb-2">
+          <button class="btn btn-outline-primary" type="button">
+            <div align="center"><%= sub.name %></div>
+          </button>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

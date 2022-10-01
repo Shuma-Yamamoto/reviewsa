@@ -6,7 +6,6 @@
   <%= search_form_for @q do |f| %>
     <%= f.label :name_cont, "レビューを投稿する参考書を検索してください。" %><br>
     <%= f.search_field :name_cont %>
-
     <%= f.submit "検索" %>
   <% end %>
 </div>
@@ -15,33 +14,20 @@
   <h5 class="mb-2">検索結果</h5>
   <% @books.each do |b| %>
     <div class="card border-dark mb-3" style="width: 100%;">
-      <% if b.reviews.pluck(:university_student_id).include?(current_university_student.id) %>
-        <%= link_to edit_review_path(id:b.reviews.find_by(university_student_id: current_university_student.id).id),
-                    class: "text-decoration-none text-dark" do %>
-          <div class="mt-1 mb-1 ms-2">
-            参考書名：<%= b.name %><br>
-            価格&emsp;&emsp;：<%= b.price %>円
-          </div>
-        <% end %>
 
+      <% if b.reviews.pluck(:university_student_id).include?(@univ_student.id) %>
+        <%= render 'layouts/book', link: edit_review_path(id:b.reviews.find_by(university_student_id:
+                                                                                 @univ_student.id).id), b: b %>
       <% elsif b.subject_id.nil? %>
-        <%= link_to edit_book_path(id:b.id), class: "text-decoration-none text-dark" do %>
-          <div class="mt-1 mb-1 ms-2">
-            参考書名：<%= b.name %><br>
-            価格&emsp;&emsp;：<%= b.price %>円
-          </div>
-        <% end %>
+        <%= render 'layouts/book', link: edit_book_path(id:b.id), b: b %>
 
       <% else %>
-        <%= link_to new_review_path(id:b.id), class: "text-decoration-none text-dark" do %>
-          <div class="mt-1 mb-1 ms-2">
-            参考書名：<%= b.name %><br>
-            価格&emsp;&emsp;：<%= b.price %>円
-          </div>
-        <% end %>
+        <%= render 'layouts/book', link: new_review_path(id:b.id), b: b %>
       <% end %>
+
     </div>
   <% end %>
+
 <% else %>
   <h5>検索結果なし</h5>
 <% end %>
