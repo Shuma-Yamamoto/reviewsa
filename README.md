@@ -35,6 +35,10 @@
 - GitHub Actions
 <hr>
 
+## アーキテクチャ
+<img src="https://user-images.githubusercontent.com/70557787/193438843-8ba6a83c-a515-4783-b38a-f6f30d3b8755.png">
+<hr>
+
 ## 機能
 ### 非ログイン者
 - レビューの閲覧機能
