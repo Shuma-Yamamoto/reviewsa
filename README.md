@@ -32,6 +32,7 @@
 - Bootstrap 5
 - Rubocop 1.36.0
 - Heroku 7.63.0
+- Heroku Postgres
 - GitHub Actions
 <hr>
 
